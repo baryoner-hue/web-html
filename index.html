@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kejutan Ulang Tahun!</title>
-    <!-- Font klasik dan mewah -->
+    <!-- Mengimpor font dari Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
+        /* Pengaturan Dasar dan Latar Belakang */
         body {
             margin: 0;
             padding: 0;
@@ -20,7 +21,7 @@
             color: #d4af37;
         }
 
-        /* Bingkai klasik */
+        /* Bingkai Emas Klasik */
         body::before {
             content: '';
             position: absolute;
@@ -30,6 +31,7 @@
             pointer-events: none;
             z-index: 10;
         }
+        
         body::after {
             content: '';
             position: absolute;
@@ -40,7 +42,7 @@
             z-index: 10;
         }
 
-        /* ================== EFEK HUJAN HATI ================== */
+        /* Efek Hujan Hati */
         #hujan-hati-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -53,7 +55,7 @@
         .hati-jatuh {
             position: absolute;
             top: -50px;
-            color: #d4af37; /* Warna emas */
+            color: #d4af37;
             opacity: 0.2;
             animation: jatuh linear infinite;
         }
@@ -63,7 +65,7 @@
             100% { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* ================== PENGATURAN LAYAR ================== */
+        /* Pengaturan Area Layar Konten */
         .layar {
             display: flex;
             flex-direction: column;
@@ -75,7 +77,7 @@
             z-index: 5;
         }
 
-        /* ================== LAYAR AWAL ================== */
+        /* Tampilan Layar Pertama */
         #layar-awal {
             transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
         }
@@ -137,7 +139,7 @@
             50%, 100% { left: 100%; }
         }
 
-        /* ================== LAYAR UCAPAN (ANIMASI POP-UP) ================== */
+        /* Tampilan Layar Kedua (Ucapan Pop Up) */
         #layar-ucapan {
             opacity: 0;
             visibility: hidden;
@@ -146,7 +148,6 @@
             transform: scale(0.1);
         }
 
-        /* Animasi pop-up membal saat aktif */
         #layar-ucapan.aktif {
             visibility: visible;
             animation: efekPopUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
@@ -199,17 +200,17 @@
 </head>
 <body>
 
-    <!-- Container untuk efek hujan hati -->
+    <!-- Wadah Hujan Hati (Diisi otomatis oleh JavaScript) -->
     <div id="hujan-hati-container"></div>
 
-    <!-- LAYAR PERTAMA -->
+    <!-- TAMPILAN AWAL -->
     <div id="layar-awal" class="layar">
         <div class="judul-awal">A Special Day</div>
         <div class="hati-tengah" onclick="bukaUcapan()">❤️</div>
         <button class="tombol-tap" onclick="bukaUcapan()">Tap Here</button>
     </div>
 
-    <!-- LAYAR KEDUA -->
+    <!-- TAMPILAN UCAPAN (Akan muncul setelah diklik) -->
     <div id="layar-ucapan" class="layar">
         <div class="hiasan-atas">❦</div>
         <h1>Selamat Ulang Tahun</h1>
@@ -224,47 +225,47 @@
         <div class="kue">🥂</div>
     </div>
 
+    <!-- Skrip Interaksi -->
     <script>
-        // Fungsi untuk membuat hujan hati secara acak saat web dimuat
+        // Membuat hujan hati di latar belakang
         function buatHujanHati() {
             const container = document.getElementById('hujan-hati-container');
-            const jumlahHati = 30; // Jumlah hati yang jatuh bersamaan
+            const jumlahHati = 30;
 
             for (let i = 0; i < jumlahHati; i++) {
                 let hati = document.createElement('div');
                 hati.classList.add('hati-jatuh');
-                hati.innerHTML = '❦'; // Menggunakan simbol elegan
+                hati.innerHTML = '❦';
                 
-                // Mengacak posisi horizontal, ukuran, dan kecepatan jatuh
                 hati.style.left = Math.random() * 100 + 'vw';
-                hati.style.animationDuration = Math.random() * 3 + 3 + 's'; // Antara 3-6 detik
-                hati.style.animationDelay = Math.random() * 5 + 's'; // Delay acak
-                hati.style.fontSize = Math.random() * 15 + 10 + 'px'; // Ukuran acak
+                hati.style.animationDuration = Math.random() * 3 + 3 + 's';
+                hati.style.animationDelay = Math.random() * 5 + 's';
+                hati.style.fontSize = Math.random() * 15 + 10 + 'px';
                 
                 container.appendChild(hati);
             }
         }
 
-        // Jalankan fungsi hujan hati saat halaman pertama kali dibuka
+        // Jalankan efek hujan saat web dibuka
         window.onload = buatHujanHati;
 
-        // Fungsi saat tombol atau hati ditekan
+        // Fungsi yang berjalan saat layar diklik
         function bukaUcapan() {
             const layarAwal = document.getElementById('layar-awal');
             const hujanHati = document.getElementById('hujan-hati-container');
             
-            // Animasi menghilang untuk layar awal dan hujan hati
+            // Sembunyikan layar awal dan hujan hati
             layarAwal.style.opacity = '0';
             layarAwal.style.transform = 'translateY(-30px) scale(0.9)';
-            hujanHati.style.opacity = '0'; // Hujan hati ikut memudar agar layar ucapan bersih
+            hujanHati.style.opacity = '0';
             
+            // Munculkan layar ucapan
             setTimeout(() => {
-                layarAwal.style.visibility = 'hidden';
+                layarAwal.style.display = 'none';
                 
-                // Memunculkan layar ucapan dengan animasi Pop-Up
                 const layarUcapan = document.getElementById('layar-ucapan');
                 layarUcapan.classList.add('aktif');
-            }, 600); // Menunggu 0.6 detik agar transisi mulus
+            }, 600);
         }
     </script>
 
