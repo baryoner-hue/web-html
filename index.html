@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kejutan Ulang Tahun!</title>
-    <!-- Mengimpor font dari Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* Pengaturan Dasar dan Latar Belakang */
         body {
             margin: 0;
             padding: 0;
@@ -21,43 +19,22 @@
             color: #d4af37;
         }
 
-        /* Bingkai Emas Klasik */
         body::before {
-            content: '';
-            position: absolute;
-            top: 20px; left: 20px; right: 20px; bottom: 20px;
-            border: 2px solid rgba(212, 175, 55, 0.3);
-            border-radius: 15px;
-            pointer-events: none;
-            z-index: 10;
+            content: ''; position: absolute; top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 15px; pointer-events: none; z-index: 10;
         }
-        
         body::after {
-            content: '';
-            position: absolute;
-            top: 25px; left: 25px; right: 25px; bottom: 25px;
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            border-radius: 12px;
-            pointer-events: none;
-            z-index: 10;
+            content: ''; position: absolute; top: 25px; left: 25px; right: 25px; bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.15); border-radius: 12px; pointer-events: none; z-index: 10;
         }
 
-        /* Efek Hujan Hati */
         #hujan-hati-container {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-            z-index: 1;
-            transition: opacity 0.8s ease;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; overflow: hidden; z-index: 1; transition: opacity 0.8s ease;
         }
 
         .hati-jatuh {
-            position: absolute;
-            top: -50px;
-            color: #d4af37;
-            opacity: 0.2;
-            animation: jatuh linear infinite;
+            position: absolute; top: -50px; color: #d4af37; opacity: 0.2; animation: jatuh linear infinite;
         }
 
         @keyframes jatuh {
@@ -65,42 +42,25 @@
             100% { transform: translateY(110vh) rotate(360deg); }
         }
 
-        /* Pengaturan Area Layar Konten */
         .layar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: absolute;
-            width: 100%;
-            z-index: 5;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            text-align: center; position: absolute; width: 100%; z-index: 5;
         }
 
-        /* Tampilan Layar Pertama */
+        /* Tampilan Layar 1 */
         #layar-awal {
             transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
         }
 
         .judul-awal {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            text-transform: uppercase;
+            font-family: 'Playfair Display', serif; font-size: 28px; letter-spacing: 2px; margin-bottom: 40px; text-transform: uppercase;
             background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            -webkit-background-clip: text; background-clip: text; color: transparent;
         }
 
         .hati-tengah {
-            font-size: 90px;
-            animation: mengambang 3s ease-in-out infinite;
-            cursor: pointer;
-            filter: drop-shadow(0px 15px 25px rgba(255, 0, 50, 0.3));
-            margin-bottom: 20px;
-            z-index: 6;
+            font-size: 90px; animation: mengambang 3s ease-in-out infinite; cursor: pointer;
+            filter: drop-shadow(0px 15px 25px rgba(255, 0, 50, 0.3)); margin-bottom: 20px; z-index: 6;
         }
 
         @keyframes mengambang {
@@ -110,47 +70,27 @@
         }
 
         .tombol-tap {
-            margin-top: 20px;
-            padding: 12px 35px;
-            font-size: 16px;
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            background: transparent;
-            color: #d4af37;
-            border: 1px solid #d4af37;
-            border-radius: 4px;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            margin-top: 20px; padding: 12px 35px; font-size: 16px; font-family: 'Montserrat', sans-serif;
+            letter-spacing: 3px; text-transform: uppercase; background: transparent; color: #d4af37;
+            border: 1px solid #d4af37; border-radius: 4px; cursor: pointer; position: relative; overflow: hidden;
             transition: all 0.3s ease;
         }
 
         .tombol-tap::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-            animation: kilap 2.5s infinite;
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent); animation: kilap 2.5s infinite;
         }
 
-        @keyframes kilap {
-            0% { left: -100%; }
-            50%, 100% { left: 100%; }
-        }
+        @keyframes kilap { 0% { left: -100%; } 50%, 100% { left: 100%; } }
 
-        /* Tampilan Layar Kedua (Ucapan Pop Up) */
+        /* Tampilan Layar 2 (Ucapan) */
         #layar-ucapan {
-            opacity: 0;
-            visibility: hidden;
-            max-width: 600px;
-            padding: 0 30px;
-            transform: scale(0.1);
+            opacity: 0; visibility: hidden; max-width: 600px; padding: 0 30px; transform: scale(0.1);
+            transition: transform 0.8s ease, opacity 0.8s ease;
         }
 
         #layar-ucapan.aktif {
-            visibility: visible;
-            animation: efekPopUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            visibility: visible; animation: efekPopUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
         }
 
         @keyframes efekPopUp {
@@ -159,113 +99,132 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .hiasan-atas {
-            font-family: 'Playfair Display', serif;
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
+        .hiasan-atas { font-family: 'Playfair Display', serif; font-size: 40px; margin-bottom: 10px; }
 
         #layar-ucapan h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 42px;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 25px;
-            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 700; margin-top: 0; margin-bottom: 25px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7); -webkit-background-clip: text; color: transparent;
         }
 
-        #layar-ucapan p {
-            color: #e0e0e0;
-            font-size: 16px;
-            line-height: 1.8;
-            margin-bottom: 15px;
+        #layar-ucapan p { color: #e0e0e0; font-size: 16px; line-height: 1.8; margin-bottom: 15px; }
+
+        .highlight { font-family: 'Playfair Display', serif; font-style: italic; color: #d4af37; font-size: 18px; }
+
+        /* Tombol Lanjut ke Foto (Panah Kanan) */
+        .tombol-lanjut {
+            margin-top: 35px; background: transparent; color: #d4af37; border: 1px solid #d4af37;
+            padding: 10px 25px; border-radius: 30px; font-family: 'Montserrat', sans-serif;
+            font-size: 14px; cursor: pointer; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;
+        }
+        .tombol-lanjut:hover { background: rgba(212, 175, 55, 0.1); transform: translateX(5px); }
+
+        /* Tampilan Layar 3 (Foto) */
+        #layar-foto {
+            opacity: 0; visibility: hidden;
+            transform: translateX(100vw); /* Posisi awal di luar layar sebelah kanan */
+            transition: transform 0.8s ease, opacity 0.8s ease;
+            max-width: 500px;
         }
 
-        .highlight {
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            color: #d4af37;
-            font-size: 18px;
+        #layar-foto.aktif {
+            opacity: 1; visibility: visible;
+            transform: translateX(0); /* Meluncur ke tengah */
         }
 
-        .kue {
-            font-size: 60px;
-            margin-top: 40px;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        .bingkai-foto {
+            width: 250px; height: 320px; margin: 0 auto 20px auto;
+            border: 3px solid #d4af37; border-radius: 10px; padding: 12px;
+            background: rgba(212, 175, 55, 0.05); box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
+        
+        .bingkai-foto img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 5px;
+        }
+
+        .teks-foto { font-family: 'Playfair Display', serif; font-size: 22px; color: #d4af37; font-style: italic; }
     </style>
 </head>
 <body>
 
-    <!-- Wadah Hujan Hati (Diisi otomatis oleh JavaScript) -->
     <div id="hujan-hati-container"></div>
 
-    <!-- TAMPILAN AWAL -->
+    <!-- LAYAR 1: Awal -->
     <div id="layar-awal" class="layar">
         <div class="judul-awal">A Special Day</div>
         <div class="hati-tengah" onclick="bukaUcapan()">❤️</div>
         <button class="tombol-tap" onclick="bukaUcapan()">Tap Here</button>
     </div>
 
-    <!-- TAMPILAN UCAPAN (Akan muncul setelah diklik) -->
+    <!-- LAYAR 2: Ucapan (Muncul setelah tap) -->
     <div id="layar-ucapan" class="layar">
         <div class="hiasan-atas">❦</div>
         <h1>Selamat Ulang Tahun</h1>
-        <p>
-            Semoga hari ini membawa kebahagiaan yang seindah senyummu.
-        </p>
-        <p>
-            Semoga setiap harapan <span class="highlight">dan doa-doa baikmu</span> <br>
-            segera terwujud di tahun yang baru ini. <br>
-            Tetaplah menjadi versi terbaik dari dirimu.
-        </p>
-        <div class="kue">🥂</div>
+        <p>Semoga hari ini membawa kebahagiaan yang seindah senyummu.</p>
+        <p>Semoga setiap harapan <span class="highlight">dan doa-doa baikmu</span> <br>
+        segera terwujud di tahun yang baru ini.</p>
+        
+        <!-- Tombol untuk menuju layar foto -->
+        <button class="tombol-lanjut" onclick="bukaFoto()">Lihat Foto <span>&#10140;</span></button>
     </div>
 
-    <!-- Skrip Interaksi -->
+    <!-- LAYAR 3: Foto (Meluncur dari kanan ke kiri) -->
+    <div id="layar-foto" class="layar">
+        <div class="bingkai-foto">
+            <!-- GANTI LINK GAMBAR DI BAWAH INI DENGAN FOTO ANDA -->
+            <img src="https://images.unsplash.com/photo-1513201099705-a9746e1e201f?w=500" alt="Foto Spesial">
+        </div>
+        <p class="teks-foto">Setiap momen bersamamu <br> adalah anugerah terindah.</p>
+    </div>
+
     <script>
-        // Membuat hujan hati di latar belakang
         function buatHujanHati() {
             const container = document.getElementById('hujan-hati-container');
-            const jumlahHati = 30;
-
+            const jumlahHati = 25;
             for (let i = 0; i < jumlahHati; i++) {
                 let hati = document.createElement('div');
                 hati.classList.add('hati-jatuh');
                 hati.innerHTML = '❦';
-                
                 hati.style.left = Math.random() * 100 + 'vw';
                 hati.style.animationDuration = Math.random() * 3 + 3 + 's';
                 hati.style.animationDelay = Math.random() * 5 + 's';
                 hati.style.fontSize = Math.random() * 15 + 10 + 'px';
-                
                 container.appendChild(hati);
             }
         }
 
-        // Jalankan efek hujan saat web dibuka
         window.onload = buatHujanHati;
 
-        // Fungsi yang berjalan saat layar diklik
+        // Transisi dari Layar 1 ke Layar 2
         function bukaUcapan() {
             const layarAwal = document.getElementById('layar-awal');
             const hujanHati = document.getElementById('hujan-hati-container');
             
-            // Sembunyikan layar awal dan hujan hati
             layarAwal.style.opacity = '0';
             layarAwal.style.transform = 'translateY(-30px) scale(0.9)';
             hujanHati.style.opacity = '0';
             
-            // Munculkan layar ucapan
             setTimeout(() => {
                 layarAwal.style.display = 'none';
-                
-                const layarUcapan = document.getElementById('layar-ucapan');
-                layarUcapan.classList.add('aktif');
+                document.getElementById('layar-ucapan').classList.add('aktif');
             }, 600);
+        }
+
+        // Transisi dari Layar 2 ke Layar 3 (Efek Slide)
+        function bukaFoto() {
+            const layarUcapan = document.getElementById('layar-ucapan');
+            const layarFoto = document.getElementById('layar-foto');
+
+            // Hapus animasi popup sebelumnya dan geser layar ucapan ke kiri
+            layarUcapan.style.animation = 'none'; 
+            layarUcapan.style.transform = 'translateX(-100vw)';
+            layarUcapan.style.opacity = '0';
+
+            setTimeout(() => {
+                layarUcapan.style.display = 'none';
+                
+                // Munculkan layar foto dengan meluncur dari kanan
+                layarFoto.classList.add('aktif');
+            }, 600); // Menunggu 0.6 detik agar animasi gesernya mulus
         }
     </script>
 
