@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kejutan Ulang Tahun!</title>
-    <!-- Mengimpor font klasik yang mewah dari Google Fonts -->
+    <!-- Font klasik dan mewah -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        /* CSS: Mengatur tampilan dan warna latar belakang */
         body {
             margin: 0;
             padding: 0;
-            /* Latar belakang merah marun gelap kehitaman untuk kesan mewah */
             background: linear-gradient(135deg, #2b0f15 0%, #1a080d 100%);
             font-family: 'Montserrat', sans-serif;
             display: flex;
@@ -19,48 +17,69 @@
             align-items: center;
             height: 100vh;
             overflow: hidden;
-            color: #d4af37; /* Warna teks utama: Emas */
+            color: #d4af37;
         }
 
-        /* Ornamen bingkai klasik di pinggir layar */
+        /* Bingkai klasik */
         body::before {
             content: '';
             position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            bottom: 20px;
-            border: 2px solid rgba(212, 175, 55, 0.3); /* Bingkai emas tipis transparan */
+            top: 20px; left: 20px; right: 20px; bottom: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
             border-radius: 15px;
             pointer-events: none;
+            z-index: 10;
         }
-
         body::after {
             content: '';
             position: absolute;
-            top: 25px;
-            left: 25px;
-            right: 25px;
-            bottom: 25px;
-            border: 1px solid rgba(212, 175, 55, 0.15); /* Bingkai emas lebih tipis di dalam */
+            top: 25px; left: 25px; right: 25px; bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
             border-radius: 12px;
             pointer-events: none;
+            z-index: 10;
         }
 
-        /* Mengatur kotak pembungkus layar */
+        /* ================== EFEK HUJAN HATI ================== */
+        #hujan-hati-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+            transition: opacity 0.8s ease;
+        }
+
+        .hati-jatuh {
+            position: absolute;
+            top: -50px;
+            color: #d4af37; /* Warna emas */
+            opacity: 0.2;
+            animation: jatuh linear infinite;
+        }
+
+        @keyframes jatuh {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* ================== PENGATURAN LAYAR ================== */
         .layar {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
             position: absolute;
             width: 100%;
+            z-index: 5;
         }
 
         /* ================== LAYAR AWAL ================== */
-        
+        #layar-awal {
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
         .judul-awal {
             font-family: 'Playfair Display', serif;
             font-size: 28px;
@@ -71,25 +90,23 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Animasi Hati Mengambang */
-        .hati {
-            font-size: 100px;
+        .hati-tengah {
+            font-size: 90px;
             animation: mengambang 3s ease-in-out infinite;
             cursor: pointer;
             filter: drop-shadow(0px 15px 25px rgba(255, 0, 50, 0.3));
             margin-bottom: 20px;
+            z-index: 6;
         }
 
         @keyframes mengambang {
             0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
+            50% { transform: translateY(-20px) scale(1.05); }
             100% { transform: translateY(0) scale(1); }
         }
 
-        /* Desain Tombol "Tap Here" Klasik */
         .tombol-tap {
             margin-top: 20px;
             padding: 12px 35px;
@@ -102,20 +119,16 @@
             border: 1px solid #d4af37;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            transition: all 0.3s ease;
         }
 
         .tombol-tap::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+            top: 0; left: -100%; width: 100%; height: 100%;
             background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
-            transition: all 0.5s ease;
             animation: kilap 2.5s infinite;
         }
 
@@ -124,33 +137,31 @@
             50%, 100% { left: 100%; }
         }
 
-        .tombol-tap:hover {
-            background: rgba(212, 175, 55, 0.1);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* ================== LAYAR UCAPAN ================== */
-        
+        /* ================== LAYAR UCAPAN (ANIMASI POP-UP) ================== */
         #layar-ucapan {
             opacity: 0;
             visibility: hidden;
-            transform: translateY(30px);
             max-width: 600px;
             padding: 0 30px;
+            transform: scale(0.1);
         }
 
+        /* Animasi pop-up membal saat aktif */
         #layar-ucapan.aktif {
-            opacity: 1;
             visibility: visible;
-            transform: translateY(0);
+            animation: efekPopUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes efekPopUp {
+            0% { opacity: 0; transform: scale(0.3) translateY(50px); }
+            50% { opacity: 1; transform: scale(1.05) translateY(-10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         .hiasan-atas {
             font-family: 'Playfair Display', serif;
             font-size: 40px;
-            color: #d4af37;
             margin-bottom: 10px;
-            line-height: 1;
         }
 
         #layar-ucapan h1 {
@@ -163,18 +174,15 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: 1px;
         }
 
         #layar-ucapan p {
             color: #e0e0e0;
             font-size: 16px;
             line-height: 1.8;
-            font-weight: 300;
             margin-bottom: 15px;
         }
 
-        /* Menandai teks tertentu di paragraf agar terlihat menonjol */
         .highlight {
             font-family: 'Playfair Display', serif;
             font-style: italic;
@@ -186,26 +194,22 @@
             font-size: 60px;
             margin-top: 40px;
             filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
-            animation: perlahanMuncul 2s ease forwards;
-            opacity: 0;
-            animation-delay: 1s;
-        }
-
-        @keyframes perlahanMuncul {
-            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Container untuk efek hujan hati -->
+    <div id="hujan-hati-container"></div>
+
     <!-- LAYAR PERTAMA -->
     <div id="layar-awal" class="layar">
         <div class="judul-awal">A Special Day</div>
-        <div class="hati" onclick="bukaUcapan()">❤️</div>
+        <div class="hati-tengah" onclick="bukaUcapan()">❤️</div>
         <button class="tombol-tap" onclick="bukaUcapan()">Tap Here</button>
     </div>
 
-    <!-- LAYAR KEDUA: Ucapan Ulang Tahun -->
+    <!-- LAYAR KEDUA -->
     <div id="layar-ucapan" class="layar">
         <div class="hiasan-atas">❦</div>
         <h1>Selamat Ulang Tahun</h1>
@@ -220,21 +224,47 @@
         <div class="kue">🥂</div>
     </div>
 
-    <!-- JavaScript: Logika untuk transisi layar -->
     <script>
+        // Fungsi untuk membuat hujan hati secara acak saat web dimuat
+        function buatHujanHati() {
+            const container = document.getElementById('hujan-hati-container');
+            const jumlahHati = 30; // Jumlah hati yang jatuh bersamaan
+
+            for (let i = 0; i < jumlahHati; i++) {
+                let hati = document.createElement('div');
+                hati.classList.add('hati-jatuh');
+                hati.innerHTML = '❦'; // Menggunakan simbol elegan
+                
+                // Mengacak posisi horizontal, ukuran, dan kecepatan jatuh
+                hati.style.left = Math.random() * 100 + 'vw';
+                hati.style.animationDuration = Math.random() * 3 + 3 + 's'; // Antara 3-6 detik
+                hati.style.animationDelay = Math.random() * 5 + 's'; // Delay acak
+                hati.style.fontSize = Math.random() * 15 + 10 + 'px'; // Ukuran acak
+                
+                container.appendChild(hati);
+            }
+        }
+
+        // Jalankan fungsi hujan hati saat halaman pertama kali dibuka
+        window.onload = buatHujanHati;
+
+        // Fungsi saat tombol atau hati ditekan
         function bukaUcapan() {
-            // Animasi menghilang untuk layar awal
             const layarAwal = document.getElementById('layar-awal');
+            const hujanHati = document.getElementById('hujan-hati-container');
+            
+            // Animasi menghilang untuk layar awal dan hujan hati
             layarAwal.style.opacity = '0';
-            layarAwal.style.transform = 'translateY(-30px)';
+            layarAwal.style.transform = 'translateY(-30px) scale(0.9)';
+            hujanHati.style.opacity = '0'; // Hujan hati ikut memudar agar layar ucapan bersih
             
             setTimeout(() => {
                 layarAwal.style.visibility = 'hidden';
                 
-                // Animasi muncul untuk layar ucapan
+                // Memunculkan layar ucapan dengan animasi Pop-Up
                 const layarUcapan = document.getElementById('layar-ucapan');
                 layarUcapan.classList.add('aktif');
-            }, 800); // Menunggu 0.8 detik sebelum memunculkan layar kedua
+            }, 600); // Menunggu 0.6 detik agar transisi mulus
         }
     </script>
 
