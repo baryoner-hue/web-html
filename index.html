@@ -4,18 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kejutan Ulang Tahun!</title>
+    <!-- Mengimpor font klasik yang mewah dari Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
         /* CSS: Mengatur tampilan dan warna latar belakang */
         body {
             margin: 0;
             padding: 0;
-            background-color: #ffe6eb; /* Warna latar belakang pink pastel */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Latar belakang merah marun gelap kehitaman untuk kesan mewah */
+            background: linear-gradient(135deg, #2b0f15 0%, #1a080d 100%);
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
+            color: #d4af37; /* Warna teks utama: Emas */
+        }
+
+        /* Ornamen bingkai klasik di pinggir layar */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            border: 2px solid rgba(212, 175, 55, 0.3); /* Bingkai emas tipis transparan */
+            border-radius: 15px;
+            pointer-events: none;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            right: 25px;
+            bottom: 25px;
+            border: 1px solid rgba(212, 175, 55, 0.15); /* Bingkai emas lebih tipis di dalam */
+            border-radius: 12px;
+            pointer-events: none;
         }
 
         /* Mengatur kotak pembungkus layar */
@@ -25,122 +54,187 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            transition: opacity 0.8s ease-in-out;
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
             position: absolute;
+            width: 100%;
+        }
+
+        /* ================== LAYAR AWAL ================== */
+        
+        .judul-awal {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         /* Animasi Hati Mengambang */
         .hati {
             font-size: 100px;
-            animation: mengambang 2s ease-in-out infinite;
+            animation: mengambang 3s ease-in-out infinite;
             cursor: pointer;
-            filter: drop-shadow(0px 10px 10px rgba(255, 0, 0, 0.2));
+            filter: drop-shadow(0px 15px 25px rgba(255, 0, 50, 0.3));
+            margin-bottom: 20px;
         }
 
         @keyframes mengambang {
             0% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-25px) scale(1.1); }
+            50% { transform: translateY(-30px) scale(1.05); }
             100% { transform: translateY(0) scale(1); }
         }
 
-        /* Desain Tombol "Tap Here" */
+        /* Desain Tombol "Tap Here" Klasik */
         .tombol-tap {
-            margin-top: 30px;
-            padding: 15px 40px;
-            font-size: 20px;
-            font-weight: bold;
-            background-color: #ff4d79;
-            color: white;
-            border: none;
-            border-radius: 50px;
+            margin-top: 20px;
+            padding: 12px 35px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            background: transparent;
+            color: #d4af37;
+            border: 1px solid #d4af37;
+            border-radius: 4px;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 77, 121, 0.4);
-            animation: detak 1.5s infinite;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes detak {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+        .tombol-tap::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+            transition: all 0.5s ease;
+            animation: kilap 2.5s infinite;
         }
 
-        /* Desain Layar Ucapan (Layar Kedua) */
+        @keyframes kilap {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+
+        .tombol-tap:hover {
+            background: rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* ================== LAYAR UCAPAN ================== */
+        
         #layar-ucapan {
             opacity: 0;
             visibility: hidden;
-            background-color: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            max-width: 80%;
-            transform: scale(0.8);
-            transition: all 0.8s ease;
+            transform: translateY(30px);
+            max-width: 600px;
+            padding: 0 30px;
         }
 
         #layar-ucapan.aktif {
             opacity: 1;
             visibility: visible;
-            transform: scale(1);
+            transform: translateY(0);
+        }
+
+        .hiasan-atas {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: #d4af37;
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         #layar-ucapan h1 {
-            color: #ff4d79;
-            margin-bottom: 10px;
-            font-size: 32px;
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728, #fbf5b7);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 1px;
         }
 
         #layar-ucapan p {
-            color: #555;
+            color: #e0e0e0;
+            font-size: 16px;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 15px;
+        }
+
+        /* Menandai teks tertentu di paragraf agar terlihat menonjol */
+        .highlight {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #d4af37;
             font-size: 18px;
-            line-height: 1.6;
         }
 
         .kue {
-            font-size: 80px;
-            margin-top: 20px;
-            animation: goyang 2s infinite;
+            font-size: 60px;
+            margin-top: 40px;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+            animation: perlahanMuncul 2s ease forwards;
+            opacity: 0;
+            animation-delay: 1s;
         }
 
-        @keyframes goyang {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-10deg); }
-            75% { transform: rotate(10deg); }
+        @keyframes perlahanMuncul {
+            to { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- LAYAR PERTAMA: Hati mengambang dan Tombol -->
+    <!-- LAYAR PERTAMA -->
     <div id="layar-awal" class="layar">
+        <div class="judul-awal">A Special Day</div>
         <div class="hati" onclick="bukaUcapan()">❤️</div>
         <button class="tombol-tap" onclick="bukaUcapan()">Tap Here</button>
     </div>
 
-    <!-- LAYAR KEDUA: Ucapan Ulang Tahun (Awalnya tersembunyi) -->
+    <!-- LAYAR KEDUA: Ucapan Ulang Tahun -->
     <div id="layar-ucapan" class="layar">
-        <h1>Selamat Ulang Tahun! 🎉</h1>
+        <div class="hiasan-atas">❦</div>
+        <h1>Selamat Ulang Tahun</h1>
         <p>
-            Semoga hari ini seindah senyummu! <br>
-            Panjang umur, sehat selalu, dan semoga semua impian <br> 
-            dan cita-citamu segera terwujud. Bahagia selalu ya!
+            Semoga hari ini membawa kebahagiaan yang seindah senyummu.
         </p>
-        <div class="kue">🎂</div>
+        <p>
+            Semoga setiap harapan <span class="highlight">dan doa-doa baikmu</span> <br>
+            segera terwujud di tahun yang baru ini. <br>
+            Tetaplah menjadi versi terbaik dari dirimu.
+        </p>
+        <div class="kue">🥂</div>
     </div>
 
-    <!-- JavaScript: Logika untuk memunculkan kejutan saat diklik -->
+    <!-- JavaScript: Logika untuk transisi layar -->
     <script>
         function bukaUcapan() {
-            // Sembunyikan layar awal
+            // Animasi menghilang untuk layar awal
             const layarAwal = document.getElementById('layar-awal');
             layarAwal.style.opacity = '0';
+            layarAwal.style.transform = 'translateY(-30px)';
             
             setTimeout(() => {
                 layarAwal.style.visibility = 'hidden';
                 
-                // Munculkan layar ucapan
+                // Animasi muncul untuk layar ucapan
                 const layarUcapan = document.getElementById('layar-ucapan');
                 layarUcapan.classList.add('aktif');
-            }, 600); // Menunggu animasi memudar selama 0.6 detik
+            }, 800); // Menunggu 0.8 detik sebelum memunculkan layar kedua
         }
     </script>
 
